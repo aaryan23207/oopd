@@ -1,6 +1,7 @@
 #include<iostream>
 #include<fstream>
 #include<string>
+#include<iomanip>
 using namespace std;
 
 int main(){
@@ -46,8 +47,8 @@ int main(){
         }
 
    
-    cout<<"actual money recieved="<<total_interest<<endl;
-    cout<<"value of money obtained after adding interest had in the year it was invested ="<<total_inflation_adjusment;
+    cout<<fixed<<setprecision(2)<<"actual money recieved="<<total_interest<<endl;
+    cout<<fixed<<setprecision(2)<<"value of money obtained after adding interest had in the year it was invested ="<<total_inflation_adjusment;
 
     file.close();
     return 0;    

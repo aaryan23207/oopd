@@ -1,6 +1,7 @@
 #include<iostream>
 #include<fstream>
 #include<string>
+#include<iomanip>
 using namespace std;
 
 int main(){
@@ -51,17 +52,17 @@ int main(){
             c=c+i;
         }
     }
-    cout<<"actual money received ="<<total_money_received<<endl;
-    cout<<"value of money obtained after adding interest had in thr year it was invested="<<t<<endl;
+    cout<<fixed<<setprecision(2)<<"actual money received ="<<total_money_received<<endl;
+    cout<<fixed<<setprecision(2)<<"value of money obtained after adding interest had in thr year it was invested="<<t<<endl;
     if(c>d){
         cout<<"monarchical era money grew faster";
 
 
     }
     else if(d>c)
-    cout<<"dictatorial era money grew faster";
-    cout<<"money grew"<<c<<"much in monarchical era";
-    cout<<"money grew"<<d<<"much in dictatorial era";
+    cout<<"dictatorial era money grew faster"<<endl;
+    cout<<"money grew"<<c<<"much in monarchical era"<<endl;
+    cout<<"money grew"<<d<<"much in dictatorial era"<<endl;
     file.close();
     return 0;
     
