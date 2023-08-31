@@ -1,61 +1,71 @@
-#include <iostream>
-#include <fstream>
-
+#include<iostream>
+#include<fstream>
+#include<string>
 using namespace std;
 
-double calculate_adjusted_amount(double investment_amount, int years, double interest_rate, double inflation_rate) {
-    for (int year = 0; year < years; ++year) {
-        double interest_earned = investment_amount * interest_rate / 100;
-        double inflation_adjustment = investment_amount * inflation_rate / 100;
-        investment_amount += interest_earned - inflation_adjustment;
-    }
-    return investment_amount;
-}
-
-int main() {
+int main(){
     ifstream file("spain_data.csv");
     if (!file.is_open()) {
-        cout << "Failed to open file." << endl;
+        cout<<"failure to open file"<<endl;
         return 1;
     }
+    string sno,year,interest_rate,inflation,govern,cont;
+    double invested_amount,year_investment;
+    
+    cout<<"enter year of investment"<<endl;
+    cin>>year_investment;
+    if(year_investment<1999){
+    cout<<"amount invested in pesta";
+    cin>>invested_amount;
+    invested_amount=invested_amount/166;
+    }
+    else{
+    cout<<"amount invested in euro";
+    cin>>invested_amount;
+    }
 
-    double investment_amount, interest_rate, inflation_rate;
-    int investment_year, target_year;
+    string header;
+    getline(file,header);
+    double total_money_received=invested_amount;
+    double t=invested_amount;
+    double d,c=0;
 
-    cout << "Enter the investment amount: ";
-    cin >> investment_amount;
-    cout << "Enter the year of investment: ";
-    cin >> investment_year;
-    cout << "Enter the target year for estimation: ";
-    cin >> target_year;
-
-    for (int year = 1960; year <= target_year; ++year) {
-        if (year >= investment_year) {
-            file >> interest_rate >> inflation_rate;
-        } else {
-            char c;
-            while (file.get(c) && c != '\n');
+    while (getline(file,sno,',')&&getline(file,year,',')&&getline(file,interest_rate,',')&&getline(file,inflation,',')&&getline(file,govern,',')&&getline(file,cont,'\n'))
+    {
+        double invested_year=stod(year);
+        if(invested_year>=year_investment && invested_year<=2022){
+            double ir=stod(interest_rate);
+            double i=stod(inflation);
+            double total_interest= 1+(ir/100);
+            double i1=1+((ir-i)/100);
+            total_money_received=total_money_received*total_interest;
+            t=t*i1;
+        }
+        if(invested_year<=1977){
+            double i=stod(inflation);
+            d=d+i;
+    
+        }
+        else if(invested_year<=2022 &&invested_year>1977){
+            double i=stod(inflation);
+            c=c+i;
         }
     }
+    cout<<"actual money received ="<<total_money_received<<endl;
+    cout<<"value of money obtained after adding interest had in thr year it was invested="<<t<<endl;
+    if(c>d){
+        cout<<"monarchical era money grew faster";
 
-    file.close();
 
-    int years = target_year - investment_year;
-    double adjusted_amount = calculate_adjusted_amount(investment_amount, years, interest_rate, inflation_rate);
-    cout << "Money actually received in " << target_year << ": " << adjusted_amount << " Euros" << endl;
-
-    double adjusted_amount_in_investment_year = calculate_adjusted_amount(adjusted_amount, investment_year - target_year, interest_rate, inflation_rate);
-    cout << "Value of money in " << investment_year << " (after adjusting for interest and inflation): " << adjusted_amount_in_investment_year << " Euros" << endl;
-
-    // Comparison between dictatorial and monarchical eras
-    double dictatorial_era_amount = calculate_adjusted_amount(investment_amount, 1975 - investment_year, interest_rate, inflation_rate);
-    double monarchical_era_amount = calculate_adjusted_amount(investment_amount, 2023 - 1975, interest_rate, inflation_rate);
-
-    if (dictatorial_era_amount > monarchical_era_amount) {
-        cout << "Money grew faster during the dictatorial era." << endl;
-    } else {
-        cout << "Money grew faster during the monarchical era." << endl;
     }
-
+    else if(d>c)
+    cout<<"dictatorial era money grew faster";
+    cout<<"money grew"<<c<<"much in monarchical era";
+    cout<<"money grew"<<d<<"much in dictatorial era";
+    file.close();
     return 0;
+    
+
+
+
 }
