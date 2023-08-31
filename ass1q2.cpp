@@ -29,7 +29,8 @@ int main(){
     getline(file,header);
     double total_money_received=invested_amount;
     double t=invested_amount;
-    double d,c=0;
+  
+    double c1,d1=1;
 
     while (getline(file,sno,',')&&getline(file,year,',')&&getline(file,interest_rate,',')&&getline(file,inflation,',')&&getline(file,govern,',')&&getline(file,cont,'\n'))
     {
@@ -44,25 +45,27 @@ int main(){
         }
         if(invested_year<=1977){
             double i=stod(inflation);
-            d=d+i;
+            double ir=stod(interest_rate);
+            d1=d1*(1+(ir)/100);
     
         }
         else if(invested_year<=2022 &&invested_year>1977){
             double i=stod(inflation);
-            c=c+i;
+            double ir=stod(interest_rate);
+            c1=c1*(1+(ir)/100);
         }
     }
     cout<<fixed<<setprecision(2)<<"actual money received ="<<total_money_received<<endl;
     cout<<fixed<<setprecision(2)<<"value of money obtained after adding interest had in thr year it was invested="<<t<<endl;
-    if(c>d){
+    if(c1>d1){
         cout<<"monarchical era money grew faster";
 
 
     }
-    else if(d>c)
+    else if(d1>c1)
     cout<<"dictatorial era money grew faster"<<endl;
-    cout<<"money grew"<<c<<"much in monarchical era"<<endl;
-    cout<<"money grew"<<d<<"much in dictatorial era"<<endl;
+    cout<<"money grew"<<" "<<c1<<" "<<"much in monarchical era"<<endl;
+    cout<<"money grew"<<" "<<d1<<" "<<"much in dictatorial era"<<endl;
     file.close();
     return 0;
     
