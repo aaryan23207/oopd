@@ -5,6 +5,7 @@
 #include<string>
 #include<iomanip>
 #include<ctime>
+#include<limits>
 using namespace std;
 
 
@@ -12,8 +13,8 @@ class Books {
 private:
 int t=0;
 int i;
-string x,z,w,book_id, authors, original_title, title, language_code, image_url, small_image_url,goodreads_book_id,best_book_id, work_id, books_count, isbn, isbn13, original_publication_year,average_rating, ratings_count, work_ratings_count, work_text_reviews_count, ratings_1, ratings_2,ratings_3, ratings_4, ratings_5;
-
+string x,z,book_id, authors, original_title, title, language_code, image_url, small_image_url,goodreads_book_id,best_book_id, work_id, books_count, isbn, isbn13, original_publication_year,average_rating, ratings_count, work_ratings_count, work_text_reviews_count, ratings_1, ratings_2,ratings_3, ratings_4, ratings_5;
+int w;
 public:
     void read1(const string& filename,int a)
     {    ifstream file1(filename);  
@@ -23,8 +24,9 @@ public:
             return;  
         }
         cout<<"Enter Title or author/authors or ISBN  of Book you want to borrow :"<<endl;
-        cin>>z;
-        
+        cin.ignore();
+        getline(cin,z);
+       
 
         string header;
         getline(file1, header);
@@ -53,7 +55,7 @@ public:
                getline(file1,ratings_5, ',') &&
                getline(file1,image_url, ',') &&
                getline(file1, small_image_url,'\n')) {
-                if(z==title|| z==authors || z==isbn)
+                if(z==title||z==authors||z==isbn)
                 {
                     t=1;
                     
@@ -66,10 +68,17 @@ public:
                     {
                     cout<<"Book is Available for borrow AT THE LIBRARY"<<endl;
                     
-                    cout<<"Do you want to borrow this book (TYPE Y FOR YES/N FOR NO)";
+                    cout<<"Do you want to borrow this book (TYPE 1 FOR YES/2 FOR NO)press  1 or 2 then  again again until program runs ususally takes 4 tries"<<endl;
+                    cin.ignore();
                     cin>>w;
-                    if(w=="Y" && a==1){
+                   
+
+                    
+                    
+                    if(w==1&& a==1)
+                    {
                     cout<<"book borrowed please return book after 1 month "<<endl;
+
                     time_t currentTime;
                     struct tm* localTimeInfo;
                     time(&currentTime);
@@ -86,8 +95,8 @@ public:
                     cout<< "Return date"<<year<<"-"<<month<<"-"<<day<<endl;
 
                     }
-                    else if (w=="Y"&& a==2){
-                        cout<<"book borrowed please return book after 6 month "<<endl;
+                    else if (w==1&& a==2){
+                    cout<<"book borrowed please return book after 6 month "<<endl;
                     time_t currentTime;
                     struct tm* localTimeInfo;
                     time(&currentTime);
@@ -105,7 +114,7 @@ public:
 
                     }
 
-                    else
+                    else if (w==2)
                     cout<<"book not borrowed"<<endl;
                     }
                     else
@@ -121,7 +130,7 @@ public:
         }
         
         if(t==0)
-        {cout<<"Book is not the library"<<endl;}
+        {cout<<"Book is not in the library"<<endl;}
 
         cout<<"Do you want to suggest new book for purchase if yes type 1 else 2"<<endl;
         cin>>i;
@@ -181,8 +190,10 @@ public:
             
             return;  
         }
-        cout<<"Enter Publication of Magazine you want to borrow :"<<endl;;
-        cin>>z;
+        cout<<"Enter Publication of Magazine you want to borrow (ENTER NAME OF PUBLICATION WITHIN QUOTATION MARKS):"<<endl;
+        cin.ignore();
+        getline(cin,z);
+        
         
 
         string header;
@@ -199,6 +210,7 @@ public:
                getline(file2,rank_wordRate, ',') &&
                getline(file2,rank_daysToBePaid, ',') &&
                getline(file2, rank_paymentDifficulty,'\n')) {
+                
                 if(z==publication)
                 {
                     i=1;
@@ -211,8 +223,12 @@ public:
                     
                     cout<<"Magazine is Available for borrow"<<endl;
                    
-                    cout<<"Do you want to borrow this Magazine (TYPE Y FOR YES/N FOR NO)";
+                    cout<<"Do you want to borrow this Magazine (TYPE Y FOR YES/N FOR NO)PRESS ENTER THEN Y THEN ENTER"<<endl;
+                    cin.ignore();
                     cin>>w;
+                    if (cin.peek() == '\n') {
+                    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+                    }
                     if(w=="Y" && s==1){
                     cout<<"book borrowed please return book after 1 month "<<endl;
                     time_t currentTime;
@@ -271,9 +287,9 @@ public:
 };
 class J:public Books,public M {
 private:
-int i;
+int i=0;
    
-string w,z,a,name,b,c;
+string w,z,a,name;
 
 public:
     
@@ -284,21 +300,25 @@ public:
         if (!file3.is_open()) {
             cout << "Failed to open file." << endl;
             
-            return;  
+              
         }
-        cout<<"Enter Journal you want to borrow :"<<endl;;
-        cin>>z;
+        cout<<"Enter Journal you want to borrow : press enter 2 times"<<endl;
+        cin.ignore();
+        getline(cin,z);
+        if (cin.peek() == '\n') {
+    cin.ignore(std::numeric_limits<std::streamsize>::max(), '\n');
+}
         
 
         
         
-        while (getline(file3,name, ',') &&
-               getline(file3,b, ',') &&
-               getline(file3, c,'\n')) {
-                a=name+b+c;
-                if(z==a)
+        while (getline(file3,name)) {
+               
+                if(z==name)
+            
                 {
-                    cout<<"Journal:"<<name<<b<<c<<endl;
+                    i=1;
+                    cout<<"Journal:"<<name<<endl;
                    
                     
                     cout<<"Journal is Available for borrow"<<endl;
@@ -351,7 +371,7 @@ int main()
     else if (x==2)
     a.read2("Magazines.csv",y);
     else if (x==3)
-    a.read3("journal.csv");
+    a.read3("journals.csv");
     else
     cout<<"wrong option choosen";
      }
@@ -385,7 +405,7 @@ int main()
     outputFile.close();
     cout<<"Password is 1234"<<endl;
 
-    cout << "Your registration is complete" << endl;
+    cout << "Your registration is complete now press enter" << endl;
     getch();
     
     system("cls");
