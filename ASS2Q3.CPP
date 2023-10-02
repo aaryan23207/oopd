@@ -245,7 +245,27 @@ public:
                 if(z==publication)
                 {
                     i=1;
-                    std::ofstream outputFile("data.csv", std::ios::app);
+                    std::ofstream outputFile("paid.csv", std::ios::app);
+
+    if (!outputFile.is_open()) {
+        cerr << "Failed to open the file." << endl;
+        return ;
+    }
+
+   
+    double paid = stod(totalPaid);
+ 
+    
+
+   
+    outputFile << paid << endl;
+
+   
+    outputFile.close();
+
+    std::cout << "Data inserted successfully." << std::endl;
+
+    std::ofstream outputFile(".csv", std::ios::app);
 
     if (!outputFile.is_open()) {
         cerr << "Failed to open the file." << endl;
@@ -396,6 +416,43 @@ public:
         std::cerr << "Failed to open the file." << std::endl;
         return ;
     }
+   
+int uq2() 
+{
+    
+    ifstream file("paid.csv");
+
+    if (!file.is_open()) {
+        cerr << "Error: Unable to open the file." << std::endl;
+        return 1;
+    }
+
+    std::string line;
+    double sum = 0.0;
+
+    while (getline(file, line)) {
+        istringstream iss(line);
+        string token;
+
+        while (getline(iss, token, ',')) {
+            try {
+                double num = stod(token);
+                sum += num;}
+                 catch (const invalid_argument& e) {
+                cerr << "Invalid number: " << token <<endl;
+            }
+        }
+    }
+
+
+    
+    file.close();
+
+    cout << "Sum of numbers in the CSV file: " << sum << endl;
+
+    return 0;
+}
+
 
     std::set<std::string> uniqueValues;
     std::string line;
