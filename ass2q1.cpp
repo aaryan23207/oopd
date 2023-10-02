@@ -1,8 +1,12 @@
 #include<iostream>
+#include<conio.h>
+#include<stdlib.h>
 #include<fstream>
 #include<string>
 #include<iomanip>
+#include<ctime>
 using namespace std;
+
 
 class Books {
 private:
@@ -11,7 +15,7 @@ int i;
 string x,z,w,book_id, authors, original_title, title, language_code, image_url, small_image_url,goodreads_book_id,best_book_id, work_id, books_count, isbn, isbn13, original_publication_year,average_rating, ratings_count, work_ratings_count, work_text_reviews_count, ratings_1, ratings_2,ratings_3, ratings_4, ratings_5;
 
 public:
-    void read1(const string& filename)
+    void read1(const string& filename,int a)
     {    ifstream file1(filename);  
         if (!file1.is_open()) {
             cout << "Failed to open file." << endl;
@@ -64,13 +68,48 @@ public:
                     
                     cout<<"Do you want to borrow this book (TYPE Y FOR YES/N FOR NO)";
                     cin>>w;
-                    if(w=="Y")
-                    cout<<"book borrowed please return book after 1 month if student 6 months if faculty"<<endl;
+                    if(w=="Y" && a==1){
+                    cout<<"book borrowed please return book after 1 month "<<endl;
+                    time_t currentTime;
+                    struct tm* localTimeInfo;
+                    time(&currentTime);
+                    localTimeInfo = localtime(&currentTime);
+
+    
+                    int year = localTimeInfo->tm_year + 1900; 
+                    int month = localTimeInfo->tm_mon + 1;     
+                    int day = localTimeInfo->tm_mday;          
+
+    
+                    cout << "Today's Date: " << year << "-" << month << "-" << day <<endl;
+                    month+=1;
+                    cout<< "Return date"<<year<<"-"<<month<<"-"<<day<<endl;
+
+                    }
+                    else if (w=="Y"&& a==2){
+                        cout<<"book borrowed please return book after 6 month "<<endl;
+                    time_t currentTime;
+                    struct tm* localTimeInfo;
+                    time(&currentTime);
+                    localTimeInfo = localtime(&currentTime);
+
+    
+                    int year = localTimeInfo->tm_year + 1900; 
+                    int month = localTimeInfo->tm_mon + 1;     
+                    int day = localTimeInfo->tm_mday;          
+
+    
+                    cout << "Today's Date: " << year << "-" << month << "-" << day <<endl;
+                    month+=6;
+                    cout<< "Return date"<<year<<"-"<<month<<"-"<<day<<endl;
+
+                    }
+
                     else
                     cout<<"book not borrowed"<<endl;
                     }
                     else
-                    cout<<"Book is not available AT THE LIBRARY"<<endl;
+                    cout<<"Book is not available AT THE LIBRARY it is curently borrowed"<<endl;
 
                 }
                
@@ -82,9 +121,9 @@ public:
         }
         
         if(t==0)
-        cout<<"Book is not the library"<<endl;
+        {cout<<"Book is not the library"<<endl;}
 
-        cout<<"Do you want to suggest this book for if yes type 1 else 2"<<endl;
+        cout<<"Do you want to suggest new book for purchase if yes type 1 else 2"<<endl;
         cin>>i;
         if(i==1)
         {string filename = "newbooks.txt";
@@ -135,7 +174,7 @@ public:
     
    
     
-    void read2(const string& filename)
+    void read2(const string& filename,int s)
     {    ifstream file2(filename);  
         if (!file2.is_open()) {
             cout << "Failed to open file." << endl;
@@ -174,8 +213,44 @@ public:
                    
                     cout<<"Do you want to borrow this Magazine (TYPE Y FOR YES/N FOR NO)";
                     cin>>w;
-                    if(w=="Y")
-                    cout<<"Magazine borrowed please return book after 1 month if student 6 months if faculty"<<endl;
+                    if(w=="Y" && s==1){
+                    cout<<"book borrowed please return book after 1 month "<<endl;
+                    time_t currentTime;
+                    struct tm* localTimeInfo;
+                    time(&currentTime);
+                    localTimeInfo = localtime(&currentTime);
+
+    
+                    int year = localTimeInfo->tm_year + 1900; 
+                    int month = localTimeInfo->tm_mon + 1;     
+                    int day = localTimeInfo->tm_mday;          
+
+    
+                    cout << "Today's Date: " << year << "-" << month << "-" << day <<endl;
+                    month+=1;
+                    cout<< "Return date"<<year<<"-"<<month<<"-"<<day<<endl;
+
+                    }
+                    else if (w=="Y"&& s==2){
+                        cout<<"book borrowed please return book after 6 month "<<endl;
+                    time_t currentTime;
+                    struct tm* localTimeInfo;
+                    time(&currentTime);
+                    localTimeInfo = localtime(&currentTime);
+
+    
+                    int year = localTimeInfo->tm_year + 1900; 
+                    int month = localTimeInfo->tm_mon + 1;     
+                    int day = localTimeInfo->tm_mday;          
+
+    
+                    cout << "Today's Date: " << year << "-" << month << "-" << day <<endl;
+                    month+=6;
+                    cout<< "Return date"<<year<<"-"<<month<<"-"<<day<<endl;
+
+                    }
+
+                    
                     else
                     cout<<"Magazine not borrowed"<<endl;
 
@@ -256,19 +331,30 @@ int main()
     cout<<"ARE YOU A REGISTERED USER (TYPE 1 FOR YES 2 FOR NO)"<<endl;
     int i;
     cin>>i;
+    cout<<"ARE YOU STUDENT OR FACULTY TYPE 1 FOR STUDENT AND 2 FOR FACULTY";
+    int y;
+    cin>>y;
+    
     if(i==1)
-    {int x;
+    {string password;
+     cout<<"Enter Password";
+     cin>>password;
+     if(password=="1234")
+     {  
+
+    int x;
     J a;
     cout<<"Enter what you want to borrow (Type 1 for books 2 for magazines and 3 for journals):"<<endl;
     cin>>x;
     if(x==1)
-    a.read1("books.csv");
+    a.read1("books.csv",y);
     else if (x==2)
-    a.read2("Magazines.csv");
+    a.read2("Magazines.csv",y);
     else if (x==3)
     a.read3("journal.csv");
     else
     cout<<"wrong option choosen";
+     }
     }
     else if  (i==2)
     {
@@ -282,7 +368,7 @@ int main()
         exit; 
     }
 
-    cout << "Enter your name(use underscore for space in name if needed for last name) then type , and write student if student and faculty if faculty  (type 'q' to quit):\n";
+    cout << "Enter your name then type , and write student if student and faculty if faculty  (type 'q' to quit):\n";
 
     string input;
     while (true) {
@@ -297,8 +383,34 @@ int main()
 
     
     outputFile.close();
+    cout<<"Password is 1234"<<endl;
 
-    cout << "Data has been written to the file now re run the program to enter and this time type 1." << endl;
+    cout << "Your registration is complete" << endl;
+    getch();
+    
+    system("cls");
+    string password;
+    cout<<"Enter Password";
+    cin>>password;
+     if(password=="1234")
+     {  
+
+    int x;
+    J a;
+    cout<<"Enter what you want to borrow (Type 1 for books 2 for magazines and 3 for journals):"<<endl;
+    cin>>x;
+    if(x==1)
+    a.read1("books.csv",y);
+    else if (x==2)
+    a.read2("Magazines.csv",y);
+    else if (x==3)
+    a.read3("journal.csv");
+    else
+    cout<<"wrong option choosen";
+     }
+
+
+    
 
         
 

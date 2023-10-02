@@ -1,44 +1,36 @@
 # Library Management System
 
-The Library Management System is a C++ program that allows registered users to borrow books, magazines, and journals from the library. The program provides the following features:
-
-- **Books**: Users can search for books by title, author, or ISBN. They can check the availability of books and borrow them from the library.
-
-- **Magazines**: Users can search for magazines by publication name. They can also borrow magazines if they are available.
-
-- **Journals**: Users can search for journals and borrow them if they are available.
+## Introduction
+This C++ program implements a Library Management System where users can borrow books, magazines, and journals from the library. The system is designed for both students and faculty members. It allows users to search for books, magazines, and journals, borrow them, and suggest new books for purchase.
 
 ## Features
-
 - Search for books by title, author, or ISBN.
-- Borrow books, magazines, and journals.
-- Check the availability of items in the library.
-- Suggest new books for the library collection.
-
-## Getting Started
-
-To use the Library Management System, follow these steps:
-
-1. Run the program.
-2. Choose whether you are a registered user (1 for yes, 2 for no).
-3. If you are a registered user, select the type of item you want to borrow (1 for books, 2 for magazines, 3 for journals).
-4. Enter the relevant information (e.g., book title, author) to search for items.
-5. Follow the on-screen instructions to borrow items or suggest new books.
+- Search for magazines by publication name.
+- Borrow books and magazines with different return periods (1 month for students, 6 months for faculty).
+- Suggest new books for purchase.
 
 ## Prerequisites
-
-- C++ Compiler
+- C++ compiler
+- Input data files: `books.csv`, `Magazines.csv`, `journal.csv` (Ensure these files are present with appropriate data.)
 
 ## Usage
+1. Compile the program using a C++ compiler.
+2. Run the compiled executable.
+3. Follow the on-screen instructions to use the Library Management System.
+4. If you are a new user (not registered), follow the registration process, and use the password "1234."
+5. After registration, log in using your credentials.
+6. Choose whether you are a student or faculty member.
+7. Select the type of material you want to borrow (books, magazines, or journals) and follow the instructions to complete the borrowing process.
+8. If you want to suggest a new book for purchase, select the appropriate option and follow the instructions.
 
-1. Clone the repository to your local machine.
-2. Compile the C++ program.
-3. Run the executable file.
+## Data Files
+- `books.csv`: Contains information about available books.
+- `Magazines.csv`: Contains information about available magazines.
+- `journal.csv`: Contains information about available journals.
+- `newbooks.txt`: Used to suggest new books for purchase.
+- `newreg.txt`: Used for user registration.
 
-## Authors
-
-- Aaryan Singhwal MT23207
-
-
-
+## Author
+AARYAN SINGHWAL 
+MT23207
 
