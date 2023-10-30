@@ -2,7 +2,12 @@
 int main()
 {
   Q5 a;
- a.read1("subscribers.csv");
- a.read2("MVNOSpectrum.csv");
+ bool read1Result = false;
+
+    a.read1("subscribers.csv", read1Result);
+
+    if (!read1Result) {
+        a.read2("MVNOSpectrum.csv");
+    }
 
 }

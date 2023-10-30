@@ -280,6 +280,7 @@ private:
 float t=0;
 float i,j=0;
 int x,p,a,b,u;
+int w=0;
 
 string z,y,date,company,spectrumrange,circle,Revenue_in_Cr;
 string date2,company2,location,subscibers;
@@ -314,7 +315,7 @@ public:
                getline(file1,circle, ',') &&
                getline(file1, Revenue_in_Cr,'\n')) {
                 if(name==company && name1==circle)
-                {
+                { w=1;
                 
                     z=spectrumrange;
                    
@@ -388,6 +389,7 @@ public:
                
                
             }
+            if(w==1){
             cout<<"Data has been saved"<<endl;
             cout<<"Do you want to print future data then press 1 and enter else 0 and enter "<<endl;
             cin>>u;
@@ -414,7 +416,9 @@ public:
                 
                
                
-            }}
+            }}}
+            else
+            cout<<"invalid data"<<endl;
 
 
 

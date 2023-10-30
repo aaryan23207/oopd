@@ -5,4 +5,5 @@ int main() {
     q4 a;
     a.read1("spectrumRange.csv","subscribers.csv","combined_sorted.csv");
     return 0;
+
 }

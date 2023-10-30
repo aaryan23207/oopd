@@ -62,10 +62,11 @@ class Subs {
 private:
 int t=0;
 int i;
+int w=0;
 
 string date,company,location,subscribers,a;
 public:
-    void read1(const string& filename)
+    void read1(const string& filename,bool& resultFlag)
     {    ifstream file1(filename);  
         if (!file1.is_open()) {
             cout << "Failed to open file." << endl;
@@ -85,7 +86,7 @@ public:
                getline(file1,location, ',') &&
                getline(file1, subscribers,'\n')) {
                 
-                    
+                 w=1;   
                     
                     cout<<"Date:"<<date<<endl;
                     cout<<"Company :"<< company<<endl;
@@ -109,15 +110,18 @@ public:
 
         string header;
         getline(file1, header);
+       
 
         
         while (getline(file1,date, ',') &&
                getline(file1,company, ',') &&
                getline(file1,location, ',') &&
                getline(file1,subscribers,'\n')) {
+                
 
                 if(a==date || a==company|| a==location || a==subscribers){
                     cout<<date<<" "<<company<<" "<<location<<" "<<subscribers<<endl;
+                    w=1;
                 }
                 
                     
@@ -130,6 +134,12 @@ public:
         file1.close();
             
         }
+        if (w==0){
+        cout<<"invalid input"<<endl;
+        resultFlag = true;
+     
+        }
+        
         
     }
     
@@ -442,6 +452,7 @@ class Q5 :public Subs {
 private:
 int t=0;
 int i;
+int w=0;
 
 string date4,MVNOcompany,location1,request,a,b;
 public:
@@ -472,6 +483,7 @@ public:
 
                 if(a==date4 || a==MVNOcompany|| a==location1 || a==request){
                     cout<<date4<<" "<<MVNOcompany<<" "<<location1<<" "<<request<<endl;
+                    w=1;
                 }
                 
                     
@@ -479,6 +491,8 @@ public:
                     
                
             }
+            if (w==0)
+            cout<<"invalid input"<<endl;
            
         
        

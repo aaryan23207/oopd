@@ -62,6 +62,7 @@ class Subs {
 private:
 int t=0;
 int i;
+int w=0;
 
 string date,company,location,subscribers,a;
 public:
@@ -85,7 +86,7 @@ public:
                getline(file1,location, ',') &&
                getline(file1, subscribers,'\n')) {
                 
-                    
+                 w=1;   
                     
                     cout<<"Date:"<<date<<endl;
                     cout<<"Company :"<< company<<endl;
@@ -109,15 +110,18 @@ public:
 
         string header;
         getline(file1, header);
+       
 
         
         while (getline(file1,date, ',') &&
                getline(file1,company, ',') &&
                getline(file1,location, ',') &&
                getline(file1,subscribers,'\n')) {
+                
 
                 if(a==date || a==company|| a==location || a==subscribers){
                     cout<<date<<" "<<company<<" "<<location<<" "<<subscribers<<endl;
+                    int w=1;
                 }
                 
                     
@@ -130,6 +134,10 @@ public:
         file1.close();
             
         }
+        if (w==0)
+        cout<<"invalid input"<<endl;
+        if(i!=1&&i!=2)
+        cout<<"invalid input"<<endl;
         
     }
     
